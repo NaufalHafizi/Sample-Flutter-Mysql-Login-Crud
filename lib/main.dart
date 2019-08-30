@@ -7,9 +7,13 @@ import 'package:mysqlcrudnlogin/ui/6_TeacherHomePage.dart';
 import 'package:provider/provider.dart';
 import 'model/getLogin.dart';
 
+<<<<<<< HEAD
 //String phone = 'http://192.168.43.58';
 //String phone = 'http://10.0.2.2';
 String phone = 'https://www.naufalhafizi.my/ihadir';
+=======
+String phone = 'yourURLorIp';
+>>>>>>> 35edfb995e103aa65acb4919ad976e0a669c83b0
 
 void main() {
   runApp(
