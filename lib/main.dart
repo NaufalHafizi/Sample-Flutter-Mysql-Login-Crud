@@ -9,7 +9,7 @@ import 'model/getLogin.dart';
 
 //String phone = 'http://192.168.43.58';
 //String phone = 'http://10.0.2.2';
-String phone = 'https://www.naufalhafizi.my';
+String phone = 'https://www.naufalhafizi.my/ihadir';
 
 void main() {
   runApp(

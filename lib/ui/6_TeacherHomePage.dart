@@ -26,7 +26,7 @@ class TeacherHomePage extends StatelessWidget {
                       color: Colors.red,
                       onPressed: () {
                         adminhomemodel.datauser = '';
-                        Navigator.pushReplacementNamed(context, '/');
+                        Navigator.pushNamedAndRemoveUntil(context, '/', (route)=>false);
                       }
                     ),
                   ],

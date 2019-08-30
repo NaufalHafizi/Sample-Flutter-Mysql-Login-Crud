@@ -9,8 +9,9 @@ import 'package:provider/provider.dart';
 
 class LoginPage extends StatelessWidget {
 
-  TextEditingController user = new TextEditingController();
-  TextEditingController pass = new TextEditingController();
+  static TextEditingController user = new TextEditingController();
+  static TextEditingController pass = new TextEditingController();
+  
 
   //"username" yg bawah mesti sama dgn argument di php
 
@@ -18,7 +19,7 @@ class LoginPage extends StatelessWidget {
     
     var adminhomemodel = Provider.of<GetAdminHomeModel>(context);
 
-    final response = await http.post(phone + '/ihadir/login.php', body: {
+    final response = await http.post(phone + '/login.php', body: {
       "username": user.text,
       "password": pass.text,
     });
@@ -74,6 +75,8 @@ class LoginPage extends StatelessWidget {
                       onPressed: () {
                         adminhomemodel.getisLoading = true;
                         _login(context);
+                        user = null;
+                        pass = null;
                       },
                     ),
 

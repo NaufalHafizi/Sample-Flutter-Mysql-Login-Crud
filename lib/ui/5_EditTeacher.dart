@@ -27,8 +27,8 @@ class _EditTeacherState extends State<EditTeacher> {
     super.initState();
   }
 
-  void editData() {
-    var url = '$phone/ihadir/editdata.php';
+  void editData() async {
+    var url = '$phone/editdata.php';
 
     http.post(url, body: {
       "ID": widget.user[widget.index]['ID'],

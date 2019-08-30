@@ -8,11 +8,11 @@ import '5_EditTeacher.dart';
 
 class TeacherDetails extends StatelessWidget {
 
-  void deleteData(BuildContext context) {
+  void deleteData(BuildContext context) async {
 
     var adminhomemodel = Provider.of<GetAdminHomeModel>(context);
 
-    var url = "$phone/ihadir/deleteData.php";
+    var url = "$phone/deleteData.php";
 
     http.post(url, body: {
       'ID': adminhomemodel.user[adminhomemodel.index]['ID']

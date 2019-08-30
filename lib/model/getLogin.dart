@@ -21,7 +21,7 @@ class GetAdminHomeModel with ChangeNotifier {
 
   Future<List> getData() async {
     try {
-      final response = await http.get(phone + '/ihadir/getdata.php');
+      final response = await http.get(phone + '/getdata.php');
     return json.decode(response.body);
     } catch (e) {
       print(e);

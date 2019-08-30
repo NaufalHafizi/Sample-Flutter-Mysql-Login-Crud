@@ -4,12 +4,12 @@ import 'package:mysqlcrudnlogin/main.dart';
 
 class TeacherAdd extends StatelessWidget {
 
-  TextEditingController controllerEmail  = new TextEditingController();
-  TextEditingController controllerPassword  = new TextEditingController();
-  TextEditingController controllerSekolah  = new TextEditingController();
+  static TextEditingController controllerEmail  = new TextEditingController();
+  static TextEditingController controllerPassword  = new TextEditingController();
+  static TextEditingController controllerSekolah  = new TextEditingController();
 
-  void addData() {
-    var url = '$phone/ihadir/adddata.php';
+  void addData() async {
+    var url = '$phone/adddata.php';
   //email tu kena sama dgn php argument
     http.post(url, body: {
       "email": controllerEmail.text, 
