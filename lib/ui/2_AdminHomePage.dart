@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mysqlcrudnlogin/model/getLogin.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:mysqlcrudnlogin/statefulwrapper.dart';
 import 'package:provider/provider.dart';
 
 class AdminHomePage extends StatelessWidget {
@@ -10,65 +11,68 @@ class AdminHomePage extends StatelessWidget {
 
     var adminhomemodel = Provider.of<GetAdminHomeModel>(context);
 
-    return ModalProgressHUD(
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text('Welcome ${adminhomemodel.datauser[0]['username']}'),
-          actions: <Widget>[
-            IconButton(
-              icon: Icon(Icons.exit_to_app),
-              tooltip: "Log Out",
-              onPressed: () {
-                AlertDialog alertDialog = new AlertDialog(
-                  title: Text('Are you sure to log out ?'),
-                  actions: <Widget>[
-                    RaisedButton(
-                      child: new Text("Cancel", style: TextStyle(color: Colors.black),),
-                      onPressed: () => Navigator.pop(context),
-                      color: Colors.green,
-                    ),
-                    RaisedButton(
-                      child: new Text("Log Out", style: TextStyle(color: Colors.black),),
-                      color: Colors.red,
-                      onPressed: () {
-                        adminhomemodel.datauser = '';
-                        Navigator.pushNamedAndRemoveUntil(context, '/', (route)=>false);
-                      }
-                    ),
-                  ],
+    return StatefulWrapper(
+      onInit: () => adminhomemodel.checkInternetConnectivity(context),
+        child: ModalProgressHUD(
+        child: Scaffold(
+          appBar: AppBar(
+            title: Text('Welcome ${adminhomemodel.datauser[0]['username']}'),
+            actions: <Widget>[
+              IconButton(
+                icon: Icon(Icons.exit_to_app),
+                tooltip: "Log Out",
+                onPressed: () {
+                  AlertDialog alertDialog = new AlertDialog(
+                    title: Text('Are you sure to log out ?'),
+                    actions: <Widget>[
+                      RaisedButton(
+                        child: new Text("Cancel", style: TextStyle(color: Colors.black),),
+                        onPressed: () => Navigator.pop(context),
+                        color: Colors.green,
+                      ),
+                      RaisedButton(
+                        child: new Text("Log Out", style: TextStyle(color: Colors.black),),
+                        color: Colors.red,
+                        onPressed: () {
+                          adminhomemodel.datauser = '';
+                          Navigator.pushNamedAndRemoveUntil(context, '/', (route)=>false);
+                        }
+                      ),
+                    ],
+                  );
+                  showDialog(context: context, builder: (_) => alertDialog);
+                  
+                },
+              )
+            ],
+          ),
+          floatingActionButton: new FloatingActionButton(
+            child: new Icon(Icons.add),
+            onPressed: () => Navigator.pushNamed(context, '/teacheradd'),
+          ),
+          body: new FutureBuilder<List>(
+            future: adminhomemodel.getData(),
+            builder: (context, snapshot){
+              if(snapshot.hasError){
+                print(snapshot.error);
+                return Container(
+                  child: Center(
+                    child: new Text(snapshot.error),
+                  ),
                 );
-                showDialog(context: context, builder: (_) => alertDialog);
-                
-              },
-            )
-          ],
+              } else {
+                adminhomemodel.user = snapshot.data;
+                return  snapshot.hasData 
+                ? new ItemList()
+                : new Center (child: new  CircularProgressIndicator(),);
+              } 
+            },
+          )
         ),
-        floatingActionButton: new FloatingActionButton(
-          child: new Icon(Icons.add),
-          onPressed: () => Navigator.pushNamed(context, '/teacheradd'),
-        ),
-        body: new FutureBuilder<List>(
-          future: adminhomemodel.getData(),
-          builder: (context, snapshot){
-            if(snapshot.hasError){
-              print(snapshot.error);
-              return Container(
-                child: Center(
-                  child: new Text(snapshot.error),
-                ),
-              );
-            } else {
-              adminhomemodel.user = snapshot.data;
-              return  snapshot.hasData 
-              ? new ItemList()
-              : new Center (child: new  CircularProgressIndicator(),);
-            } 
-          },
-        )
+        inAsyncCall: adminhomemodel.getisLoading,
+        opacity: 0.5,
+        progressIndicator: CircularProgressIndicator(),
       ),
-      inAsyncCall: adminhomemodel.getisLoading,
-      opacity: 0.5,
-      progressIndicator: CircularProgressIndicator(),
     );
   }
 }
