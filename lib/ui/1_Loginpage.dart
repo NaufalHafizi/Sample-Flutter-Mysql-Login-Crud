@@ -9,6 +9,8 @@ import 'package:provider/provider.dart';
 
 class LoginPage extends StatelessWidget {
 
+  static GlobalKey<FormState> _formkey = GlobalKey<FormState>();
+
   static TextEditingController user = new TextEditingController();
   static TextEditingController pass = new TextEditingController();
   
@@ -23,6 +25,8 @@ class LoginPage extends StatelessWidget {
       "username": user.text,
       "password": pass.text,
     });
+
+    print(response.body);
 
     adminhomemodel.datauser = jsonDecode(response.body);
 
@@ -51,37 +55,43 @@ class LoginPage extends StatelessWidget {
             child: Center(
               child: Padding(
                 padding: const EdgeInsets.all(40.0),
-                child: Column(
-                  children: <Widget>[
-                    SizedBox(height: 150,),
-                    
-                    TextField(
-                      controller: user,
-                      decoration: InputDecoration(
-                        hintText: 'Username'
+                child: Form(
+                  key: _formkey,
+                  child: Column(
+                    children: <Widget>[
+                      SizedBox(height: 150,),
+                      
+                      TextFormField(
+                        controller: user,
+                        decoration: InputDecoration(
+                          hintText: 'Username'
+                        ),
+                        validator: (value) => value.isEmpty ? 'Email required' : null,
                       ),
-                    ),
-                    
-                    TextField(
-                      controller: pass,
-                      obscureText: true,
-                      decoration: InputDecoration(
-                        hintText: 'Password'
+                      
+                      TextFormField(
+                        controller: pass,
+                        obscureText: true,
+                        decoration: InputDecoration(
+                          hintText: 'Password'
+                        ),
+                        validator: (value) => value.isEmpty ? 'Password required' : null,
                       ),
-                    ),
-                    SizedBox(height: 20,),
-                    RaisedButton(
-                      child: Text('Login'),
-                      onPressed: () {
-                        adminhomemodel.getisLoading = true;
-                        _login(context);
-                        user = null;
-                        pass = null;
-                      },
-                    ),
+                      SizedBox(height: 20,),
+                      RaisedButton(
+                        child: Text('Login'),
+                        onPressed: () {
+                          if (_formkey.currentState.validate()) {
+                            _formkey.currentState.save();
+                            adminhomemodel.getisLoading = true;
+                          _login(context);
+                          }
+                        },
+                      ),
 
-                    Text(adminhomemodel.getmsg, style: TextStyle(fontSize: 20.0, color: Colors.red),)
-                  ],
+                      Text(adminhomemodel.getmsg, style: TextStyle(fontSize: 20.0, color: Colors.red),)
+                    ],
+                  ),
                 ),
               ),
             ),
