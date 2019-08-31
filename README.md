@@ -6,7 +6,7 @@
 4. Page Circular Progress Indicator (ModalProgressHUD)
 5. Check Phone Connection
 
-# Replace your ip in main.dart
+## Remember to replace your ip in main.dart
 
 Demo app
 
