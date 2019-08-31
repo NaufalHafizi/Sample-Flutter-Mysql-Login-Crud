@@ -2,7 +2,8 @@
 
 Demo app
 
-![](FlighTicket.gif)
+![](a.gif)
+![](b.gif)
 
 ## Getting Started
 
