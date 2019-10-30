@@ -77,12 +77,50 @@ class AdminHomePage extends StatelessWidget {
   }
 }
 
-class ItemList extends StatelessWidget {
+class ItemList extends StatefulWidget {
+  @override
+  _ItemListState createState() => _ItemListState();
+}
+
+class _ItemListState extends State<ItemList> with TickerProviderStateMixin {
+  AnimationController animationController;
+  AnimationController animationControllerparent;
+
+   @override
+  void initState() {
+    animationControllerparent = AnimationController(duration: Duration(milliseconds: 2000), vsync: this);
+    animationController = AnimationController(duration: Duration(milliseconds: 1000), vsync: this);
+    animationControllerparent..forward();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    animationController.dispose();
+    animationControllerparent.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
+    return AnimatedBuilder(
+      animation: animationControllerparent,
+      builder: (BuildContext context, Widget child) {
+        return FadeTransition(
+          opacity: animationControllerparent,
+          child: new Transform(
+            transform: new Matrix4.translationValues(0.0, 40 * (1.0 - animationControllerparent.value), 0.0),
+            child: listview(context),
+          ),
+        );
+      },
+    );
 
+
+  }
+
+  Widget listview(BuildContext context) {
     var adminhomemodel = Provider.of<GetAdminHomeModel>(context);
-
     return ListView.builder(
       itemCount: adminhomemodel.user==null ? 0  : adminhomemodel.user.length,
       itemBuilder: (context, i){
