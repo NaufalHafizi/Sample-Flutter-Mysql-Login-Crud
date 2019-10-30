@@ -124,23 +124,43 @@ class _ItemListState extends State<ItemList> with TickerProviderStateMixin {
     return ListView.builder(
       itemCount: adminhomemodel.user==null ? 0  : adminhomemodel.user.length,
       itemBuilder: (context, i){
-        return new Container(
-          padding: const EdgeInsets.all(10.0),
-          child: new GestureDetector(
-            onTap: () {
-              adminhomemodel.index = i;
-              Navigator.pushNamed(context, '/teacherdetails');
-            },
-            child: new Card(
-              child: new ListTile(
-                title: new Text(adminhomemodel.user[i]['Teacher_email']),
-                leading: new Icon(Icons.widgets),
-                subtitle: new Text("Sekolah : ${adminhomemodel.user[i]['Teacher_sekolah']}"),
-              )
-            ),
+        var count = adminhomemodel.user.length > 10 ? 10 : adminhomemodel.user.length;
+          var animation = Tween(begin: 0.0, end: 1.0)
+              .animate(CurvedAnimation(parent: animationControllerparent, curve: Interval((1 / count) * i, 1.0, curve: Curves.fastOutSlowIn)));
+          animationControllerparent.forward();
+        return listt(context, i, animation);
+        },
+    );
+  }
+
+  Widget listt(BuildContext context, i, animation) {
+    var adminhomemodel = Provider.of<GetAdminHomeModel>(context);
+    return AnimatedBuilder(
+      animation: animationControllerparent,
+      builder: (BuildContext context, Widget child) {
+        return FadeTransition(
+          opacity: animation,
+          child: new Transform(
+            transform: new Matrix4.translationValues(0.0, 50 * (1.0 - animation.value), 0.0),
+            child: new Container(
+              padding: const EdgeInsets.all(10.0),
+              child: new GestureDetector(
+                onTap: () {
+                  adminhomemodel.index = i;
+                  Navigator.pushNamed(context, '/teacherdetails');
+                },
+                child: new Card(
+                  child: new ListTile(
+                    title: new Text(adminhomemodel.user[i]['Teacher_email']),
+                    leading: new Icon(Icons.widgets),
+                    subtitle: new Text("Sekolah : ${adminhomemodel.user[i]['Teacher_sekolah']}"),
+                  )
+                ),
+              ),
+            )
           ),
         );
-        },
+      },
     );
   }
 }
