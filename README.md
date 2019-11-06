@@ -6,7 +6,7 @@
 4. Page Circular Progress Indicator (ModalProgressHUD)
 5. Check Phone Connection
 
-## Remember to replace your ip in main.dart and conn.php
+## PHP FIle = https://www.naufalhafizi.my/ihadir/
 
 ## Update
 
