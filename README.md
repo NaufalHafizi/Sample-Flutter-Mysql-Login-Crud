@@ -11,6 +11,8 @@
 ## Update
 
 add animation
+add image to mysql
+show image from mysql
 
 Demo app
 
