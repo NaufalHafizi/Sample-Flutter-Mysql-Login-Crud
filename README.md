@@ -6,8 +6,8 @@
 4. Page Circular Progress Indicator (ModalProgressHUD)
 5. Check Phone Connection
 
-# PHP FIle = https://www.naufalhafizi.my/ihadir/php.zip
-# MYSQL = https://naufalhafizi.my/clientview/
+### PHP FIle = https://www.naufalhafizi.my/ihadir/php.zip
+### MYSQL = https://naufalhafizi.my/clientview/
 Username = naufalha_mysqlcrud
 
 password = Mysqlcrud123
