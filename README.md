@@ -12,6 +12,7 @@
 
 add animation
 add image to mysql
+resize image after select image
 show image from mysql
 
 Demo app
