@@ -48,6 +48,7 @@ class AdminHomePage extends StatelessWidget {
             ],
           ),
           floatingActionButton: new FloatingActionButton(
+            backgroundColor: Colors.purple,
             child: new Icon(Icons.add),
             onPressed: () => Navigator.pushNamed(context, '/teacheradd'),
           ),
@@ -65,14 +66,14 @@ class AdminHomePage extends StatelessWidget {
                 adminhomemodel.user = snapshot.data;
                 return  snapshot.hasData 
                 ? new ItemList()
-                : new Center (child: new  CircularProgressIndicator(),);
+                : new Center (child: new  CircularProgressIndicator(backgroundColor: Colors.purple),);
               } 
             },
           )
         ),
         inAsyncCall: adminhomemodel.getisLoading,
         opacity: 0.5,
-        progressIndicator: CircularProgressIndicator(),
+        progressIndicator: CircularProgressIndicator(backgroundColor: Colors.purple),
       ),
     );
   }
@@ -136,7 +137,6 @@ class _ItemListState extends State<ItemList> with TickerProviderStateMixin {
 
   Widget listt(BuildContext context, i, animation) {
     var adminhomemodel = Provider.of<GetAdminHomeModel>(context);
-    print('allsdfj : ' + adminhomemodel.user[i]['image']);
     return AnimatedBuilder(
       animation: animationControllerparent,
       builder: (BuildContext context, Widget child) {
@@ -155,8 +155,8 @@ class _ItemListState extends State<ItemList> with TickerProviderStateMixin {
                   child: new ListTile(
                     title: new Text(adminhomemodel.user[i]['Teacher_email']),
                     leading: adminhomemodel.user[i]['image'] != ""
-                    ? new Image.network(phone + '/uploads/'+adminhomemodel.user[i]['image'],)
-                    : new Icon(Icons.widgets),
+                    ? new Image.network(phone + '/uploads/'+adminhomemodel.user[i]['image'],width: 50, height: 50) 
+                    : new Container(width: 50, height: 50, child: Icon(Icons.widgets),),
                     subtitle: new Text("Sekolah : ${adminhomemodel.user[i]['Teacher_sekolah']}"),
                   )
                 ),

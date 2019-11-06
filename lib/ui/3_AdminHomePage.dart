@@ -58,17 +58,21 @@ void confirm(BuildContext context) {
           title: new Text(adminhomemodel.user[adminhomemodel.index]['Teacher_email']),
         ),
         body: new Container(
-          height: 250.0,
+          height: 550.0,
           padding: const EdgeInsets.all(20.0),
           child: new Card(
             child: new Center(
               child: new Column(
                 children: <Widget>[
+                  SizedBox(height: 25,),
+                  adminhomemodel.user[adminhomemodel.index]['image'] != ""
+                    ? new Image.network(phone + '/uploads/'+adminhomemodel.user[adminhomemodel.index]['image'],width: 250, height: 200)
+                    : new Container(width: 200, height: 200, child: Icon(Icons.widgets),),
 
                   new  Padding(padding: const EdgeInsets.only(top: 30.0),),
                   new Text(adminhomemodel.user[adminhomemodel.index]['Teacher_email'], style: new TextStyle(fontSize: 20),),
                   new Text("Password: ${adminhomemodel.user[adminhomemodel.index]['Teacher_password']}", style: new TextStyle(fontSize: 18),),
-                  new Text("Password: ${adminhomemodel.user[adminhomemodel.index]['Teacher_sekolah']}", style: new TextStyle(fontSize: 18),),
+                  new Text("Sekolah: ${adminhomemodel.user[adminhomemodel.index]['Teacher_sekolah']}", style: new TextStyle(fontSize: 18),),
                   new  Padding(padding: const EdgeInsets.only(top: 30.0),),
 
                   new Row(

@@ -15,7 +15,7 @@ class TeacherAdd extends StatelessWidget {
   static TextEditingController controllerPassword  = new TextEditingController();
   static TextEditingController controllerSekolah  = new TextEditingController();
 
-  void addData() async {
+  Future addData() async {
     
     var stream = new http.ByteStream(DelegatingStream.typed(image.openRead()));
     var length = await image.length();
@@ -37,6 +37,8 @@ class TeacherAdd extends StatelessWidget {
     } else {
       print("Print Failed");
     }
+
+    return true;
 
   // var url = '$phone/adddata.php';
   // //email tu kena sama dgn php argument
@@ -108,8 +110,10 @@ class TeacherAdd extends StatelessWidget {
                     color: Colors.blueAccent,
                     onPressed: () {
                       // upload();
-                      addData();
-                      Navigator.pushNamedAndRemoveUntil(context, '/adminhomepage', (route)=>false);
+                      addData().then((value){
+                        Navigator.pushNamedAndRemoveUntil(context, '/adminhomepage', (route)=>false);
+                      });
+                      
                     },
                   )
                 ],

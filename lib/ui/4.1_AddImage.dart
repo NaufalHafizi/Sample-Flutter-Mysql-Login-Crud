@@ -37,12 +37,12 @@ class _UploadImageState extends State<UploadImage> {
     final tempDir = await getTemporaryDirectory();
     final path = tempDir.path;
 
-    String title = widget.imagename;
+    int rand = new Math.Random().nextInt(100000);
 
     Img.Image images = Img.decodeImage(imageFile.readAsBytesSync());
     Img.Image smallerImg = Img.copyResize(images,width: 500);
 
-    var compressImg = new File("$path/image_$title.jpg")
+    var compressImg = new File("$path/image_$rand.jpg")
     ..writeAsBytesSync(Img.encodeJpg(smallerImg, quality: 85));
 
     setState(() {

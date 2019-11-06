@@ -19,7 +19,7 @@ void main() {
       child: new MaterialApp(
         theme:
         //ThemeData(primaryColor: Colors.blueGrey, accentColor: Colors.blueAccent),
-        ThemeData(primaryColor: Colors.red, accentColor: Colors.blueAccent),
+        ThemeData(primaryColor: Colors.purple, accentColor: Colors.blueAccent),
         debugShowCheckedModeBanner: false,
         routes: {
           '/': (context) => LoginPage(),

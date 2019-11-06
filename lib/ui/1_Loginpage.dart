@@ -101,7 +101,7 @@ class LoginPage extends StatelessWidget {
         ),
         inAsyncCall: adminhomemodel.getisLoading,
         opacity: 0.5,
-        progressIndicator: CircularProgressIndicator(),
+        progressIndicator: CircularProgressIndicator(backgroundColor: Colors.purple,),
       ),
     );
   }
