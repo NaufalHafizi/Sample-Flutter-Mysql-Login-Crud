@@ -8,7 +8,7 @@ import 'package:provider/provider.dart';
 import 'model/getLogin.dart';
 
 
-String phone = 'YOURDDOMAINORIPADDRESS/FOLDER';
+String phone = 'https://www.naufalhafizi.my/ihadir'; //http://10.0.2.2/ihadir
 
 void main() {
   runApp(

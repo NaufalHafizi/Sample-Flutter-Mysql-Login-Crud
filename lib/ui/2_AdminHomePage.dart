@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mysqlcrudnlogin/main.dart';
 import 'package:mysqlcrudnlogin/model/getLogin.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:mysqlcrudnlogin/statefulwrapper.dart';
@@ -135,6 +136,7 @@ class _ItemListState extends State<ItemList> with TickerProviderStateMixin {
 
   Widget listt(BuildContext context, i, animation) {
     var adminhomemodel = Provider.of<GetAdminHomeModel>(context);
+    print('allsdfj : ' + adminhomemodel.user[i]['image']);
     return AnimatedBuilder(
       animation: animationControllerparent,
       builder: (BuildContext context, Widget child) {
@@ -152,7 +154,9 @@ class _ItemListState extends State<ItemList> with TickerProviderStateMixin {
                 child: new Card(
                   child: new ListTile(
                     title: new Text(adminhomemodel.user[i]['Teacher_email']),
-                    leading: new Icon(Icons.widgets),
+                    leading: adminhomemodel.user[i]['image'] != ""
+                    ? new Image.network(phone + '/uploads/'+adminhomemodel.user[i]['image'],)
+                    : new Icon(Icons.widgets),
                     subtitle: new Text("Sekolah : ${adminhomemodel.user[i]['Teacher_sekolah']}"),
                   )
                 ),
